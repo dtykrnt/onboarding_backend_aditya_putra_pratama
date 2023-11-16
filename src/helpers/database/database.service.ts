@@ -16,10 +16,35 @@ export class DatabaseService implements TypeOrmOptionsFactory {
       username: this.configService.get('DB_USERNAME'),
       password: this.configService.get('DB_PASSWORD'),
       database: this.configService.get('DB_NAME'),
-      synchronize: this.configService.get('DB_PASSWORD') === 'true',
+      synchronize: this.configService.get('DB_SYNC') === 'true',
       entities: ['dist/**/*.entity{.ts,.js}', 'dist/**/**/*.entity{.ts,.js}'],
       factories: ['dist/**/factories/**/*.js'],
       seeds: ['dist/**/seeds/**/*.js'],
+      autoLoadEntities: true,
     };
   }
 }
+
+export const typeOrmConfig: TypeOrmModuleOptions & {
+  factories: any;
+  seeds: any;
+} = {
+  type: 'postgres',
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  entities: ['dist/**/*.entity{.ts,.js}', 'dist/**/**/*.entity{.ts,.js}'],
+  factories: ['dist/**/factories/**/*.js'],
+  seeds: ['dist/**/seeds/**/*.js'],
+  // migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
+  // cli: {
+  //   migrationsDir: __dirname + '/../database/migrations',
+  // },
+  extra: {
+    charset: 'utf8mb4_unicode_ci',
+  },
+  synchronize: process.env.DB_SYNC === 'true',
+  autoLoadEntities: true,
+};
