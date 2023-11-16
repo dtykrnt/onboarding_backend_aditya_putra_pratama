@@ -12,6 +12,10 @@ export class OrdersService {
     return `This action returns all orders`;
   }
 
+  findAllV2() {
+    return `This action returns all orders 2`;
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} order`;
   }

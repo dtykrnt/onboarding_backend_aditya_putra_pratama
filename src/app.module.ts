@@ -7,7 +7,7 @@ import { OrdersModule } from './orders/orders.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseService } from './helpers/database/database.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Customers } from './customers/entity/customers.entity';
+import { CustomersModule } from './customers/customers.module';
 
 @Module({
   imports: [
@@ -15,12 +15,12 @@ import { Customers } from './customers/entity/customers.entity';
       isGlobal: true,
     }),
     ProductsModule,
+    CustomersModule,
     TransactionsModule,
     OrdersModule,
     TypeOrmModule.forRootAsync({
       useClass: DatabaseService,
     }),
-    TypeOrmModule.forFeature([Customers]),
   ],
   controllers: [AppController],
   providers: [AppService, DatabaseService],
