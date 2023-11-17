@@ -20,6 +20,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n src/helpers/database/database-config.ts",
+    "seed:run:customer": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/helpers/database/database-config.ts -s CustomerCreateSeeder",
+    "seed:run:product": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/helpers/database/database-config.ts -s ProductCreateSeeder",
     "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/helpers/database/database-config.ts"
   },
   "dependencies": {

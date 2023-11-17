@@ -1,25 +1,25 @@
 export interface IResponse<T> {
-  response_schema: ResponseSchema;
+  response_schema: IResponseSchema;
   response_output: T extends object
-    ? ResponseObjectOutput<T>
-    : ResponseListOutput<T>;
+    ? IResponseObjectOutput<T>
+    : IResponseListOutput<T>;
 }
 
-interface ResponseSchema {
+interface IResponseSchema {
   response_code: string;
   response_message: string;
 }
 
-interface ResponseObjectOutput<T> {
-  detail: T;
+interface IResponseObjectOutput<T> {
+  detail?: T;
 }
-interface ResponseListOutput<T> {
-  list: List<T>;
+interface IResponseListOutput<T> {
+  list: IList<T>;
 }
 
-interface List<T> {
+interface IList<T> {
+  content?: T[];
   pagination?: Pagination | null;
-  content: T[];
 }
 
 export interface Pagination {
@@ -40,4 +40,9 @@ export enum ResponseTypes {
   LIST = 'LIST',
   DETAIL = 'DETAIL',
   ERROR = 'ERROR',
+}
+
+export interface IResponseJson<T> {
+  data?: T | T[] | null;
+  pagination?: Pagination | null;
 }
