@@ -13,6 +13,7 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { BaseQueryDTO } from 'src/helpers/dto/queries.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -24,11 +25,8 @@ export class ProductsController {
   }
 
   @Get()
-  findAll(
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
-    @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number = 10,
-  ) {
-    return this.productsService.findAll(page, size);
+  findAll(@Query() queriesParam: BaseQueryDTO) {
+    return this.productsService.findAll(queriesParam);
   }
 
   @Get(':id')

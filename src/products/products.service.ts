@@ -9,6 +9,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Products } from './entities';
 import { EntityNotFoundError, Repository } from 'typeorm';
 import { IResponseJson, Pagination } from 'src/interface';
+import { BaseQueryDTO } from 'src/helpers/dto/queries.dto';
+import { IProducts } from './products.interface';
 
 @Injectable()
 export class ProductsService {
@@ -24,18 +26,23 @@ export class ProductsService {
     return { data };
   }
 
-  async findAll(page: number, size: number): Promise<IResponseJson<any>> {
-    const builder = this.productRepository.createQueryBuilder();
+  async findAll(query: BaseQueryDTO): Promise<IResponseJson<IProducts>> {
+    const { page, size, sort, order } = query;
+    const builder = this.productRepository.createQueryBuilder('p');
 
     const skip = (page - 1) * size;
-    const data = await builder.skip(skip).take(size).getMany();
+    const data = await builder
+      .orderBy(`p.${order}`, sort)
+      .skip(skip)
+      .take(size)
+      .getMany();
     const len = await builder.getCount();
 
     const pagination: Pagination = { page, size, total: len };
     return { data, pagination };
   }
 
-  async findOne(id: number): Promise<IResponseJson<any>> {
+  async findOne(id: number): Promise<IResponseJson<IProducts>> {
     const builder = this.productRepository.createQueryBuilder('p');
     const data = await builder.where('p.id = :id', { id }).getOne();
     return { data };
@@ -44,7 +51,7 @@ export class ProductsService {
   async update(
     id: number,
     updateProductDto: UpdateProductDto,
-  ): Promise<IResponseJson<any>> {
+  ): Promise<IResponseJson<IProducts>> {
     const isExist = await this.productRepository.findOneBy({ id });
     if (!isExist) {
       throw new NotFoundException();

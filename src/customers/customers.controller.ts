@@ -8,19 +8,15 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { CustomersService } from './customers.service';
-import { ResponsesInterceptors } from 'src/helpers/interceptors/responses.interceptors';
-import { CustomersDto } from './dto/customers.dto';
+import { BaseQueryDTO } from 'src/helpers/dto/queries.dto';
 
 @Controller('customers')
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
   @Get()
-  getAll(
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
-    @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number = 10,
-  ) {
-    return this.customersService.findAll(page, size);
+  getAll(@Query() queryParams: BaseQueryDTO) {
+    return this.customersService.findAll(queryParams);
   }
 
   @Get(':id')

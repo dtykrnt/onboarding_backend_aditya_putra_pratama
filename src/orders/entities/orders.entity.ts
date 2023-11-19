@@ -1,32 +1,23 @@
-import { Orders } from 'src/orders/entities/orders.entity';
+import { Products } from 'src/products/entities';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Products {
+export class Orders {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
-
-  @Column()
   quantity: number;
 
-  @Column()
-  description: string;
-
-  @Column()
-  tag: string;
-
-  @OneToMany(() => Orders, (order) => order.product)
-  orders: Orders[];
+  @ManyToOne(() => Products, (product) => product.orders)
+  product: Products;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
