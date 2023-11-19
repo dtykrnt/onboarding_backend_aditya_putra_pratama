@@ -22,7 +22,6 @@ export class CustomersService {
       .orderBy(`c.${order}`, sort)
       .skip(skip)
       .take(size)
-      .orderBy(order, sort)
       .getMany();
     const len = await builder.getCount();
 

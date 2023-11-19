@@ -59,7 +59,6 @@ export class OrdersService {
       .leftJoinAndSelect('o.product', 'product')
       .orderBy(`o.${order}`, sort)
       .take(size)
-      .orderBy(order, sort)
       .skip(skip)
       .getMany();
 
