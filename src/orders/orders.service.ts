@@ -50,21 +50,28 @@ export class OrdersService {
   }
 
   async findAll(queriesParam: BaseQueryDTO) {
-    const { page, size, sort, order } = queriesParam;
+    const { page, size, sort, order, search } = queriesParam;
     const skip = (page - 1) * size;
 
     const builder = this.orderRepository.createQueryBuilder('o');
 
-    const data = await builder
+    if (search) {
+      builder.where('o.name ILIKE :search', { search: `%${search}%` });
+    }
+
+    if (order) {
+      builder.orderBy(`o.${order}`, sort);
+    }
+
+    const [data, total] = await builder
       .leftJoinAndSelect('o.product', 'product')
-      .orderBy(`o.${order}`, sort)
       .take(size)
       .skip(skip)
-      .getMany();
+      .getManyAndCount();
 
     const len = await builder.getCount();
 
-    const pagination: Pagination = { page, size, total: len };
+    const pagination: Pagination = { page, size, total };
     return { data, pagination };
   }
 

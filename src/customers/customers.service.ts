@@ -14,18 +14,22 @@ export class CustomersService {
   ) {}
 
   async findAll(queryParams: BaseQueryDTO): Promise<IResponseJson<ICustomers>> {
-    const { page, size, sort, order } = queryParams;
+    const { page, size, sort, order, search } = queryParams;
     const builder = this.customerRepository.createQueryBuilder('c');
 
     const skip = (page - 1) * size;
-    const data = await builder
-      .orderBy(`c.${order}`, sort)
-      .skip(skip)
-      .take(size)
-      .getMany();
-    const len = await builder.getCount();
 
-    const pagination: Pagination = { page, size, total: len };
+    if (search) {
+      builder.where('c.name ILIKE :search', { search: `%${search}%` });
+    }
+
+    if (order) {
+      builder.orderBy(`c.${order}`, sort);
+    }
+
+    const [data, total] = await builder.skip(skip).take(size).getManyAndCount();
+
+    const pagination: Pagination = { page, size, total };
     return { data, pagination };
   }
 

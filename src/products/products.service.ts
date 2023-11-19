@@ -27,18 +27,22 @@ export class ProductsService {
   }
 
   async findAll(query: BaseQueryDTO): Promise<IResponseJson<IProducts>> {
-    const { page, size, sort, order } = query;
+    const { page, size, sort, order, search } = query;
     const builder = this.productRepository.createQueryBuilder('p');
 
     const skip = (page - 1) * size;
-    const data = await builder
-      .orderBy(`p.${order}`, sort)
-      .skip(skip)
-      .take(size)
-      .getMany();
-    const len = await builder.getCount();
 
-    const pagination: Pagination = { page, size, total: len };
+    if (search) {
+      builder.where('p.name ILIKE :search', { search: `%${search}%` });
+    }
+
+    if (order) {
+      builder.orderBy(`p.${order}`, sort);
+    }
+
+    const [data, total] = await builder.skip(skip).take(size).getManyAndCount();
+
+    const pagination: Pagination = { page, size, total };
     return { data, pagination };
   }
 
