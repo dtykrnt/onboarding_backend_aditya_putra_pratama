@@ -8,4 +8,8 @@ export class CreateOrderDto {
   @IsNotEmpty()
   @IsNumber()
   product_id: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  customer_id: number;
 }

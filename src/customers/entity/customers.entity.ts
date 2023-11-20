@@ -1,10 +1,12 @@
 // customers/customer.entity.ts
+import { Orders } from 'src/orders/entities/orders.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -23,4 +25,7 @@ export class Customers {
 
   @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   updated_at: Date;
+
+  @OneToMany(() => Orders, (order) => order.customer)
+  orders: Orders[];
 }
