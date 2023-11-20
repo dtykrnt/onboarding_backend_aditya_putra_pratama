@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -15,6 +16,12 @@ export class Orders {
   id: number;
 
   @Column()
+  customer_id: number;
+
+  @Column()
+  product_id: number;
+
+  @Column()
   quantity: number;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
@@ -24,8 +31,10 @@ export class Orders {
   updated_at: Date;
 
   @ManyToOne(() => Products, (product) => product.orders)
+  @JoinColumn({ name: 'product_id', referencedColumnName: 'id' })
   product: Products;
 
   @ManyToOne(() => Customers, (customer) => customer.orders)
+  @JoinColumn({ name: 'customer_id', referencedColumnName: 'id' })
   customer: Customers;
 }
