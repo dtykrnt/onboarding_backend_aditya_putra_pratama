@@ -1,5 +1,5 @@
 // customers/customer.entity.ts
-import { Orders } from 'src/orders/entities/orders.entity';
+import { Orders } from 'src/orders/entities';
 import {
   Entity,
   PrimaryGeneratedColumn,
