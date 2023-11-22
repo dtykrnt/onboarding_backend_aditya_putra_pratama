@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { OrdersService } from '../orders.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Orders } from '../entities';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { Products } from 'src/products/entities';
 import { Customers } from 'src/customers/entity';
-import { CreateOrderDto } from '../dto';
+import { CreateOrderDto, UpdateOrderDto } from '../dto';
 import { custStub, orderStub, productStub } from './stubs/order.stub';
 import { IResponseJson } from 'src/interface';
 import { ICustomers } from 'src/customers/customers.interface';
@@ -124,6 +124,71 @@ describe('OrdersService', () => {
           expect(error.status).toBe(403);
           expect(error.message).toBe('Forbidden');
         }
+      });
+    });
+
+    describe('Update Order', () => {
+      const updateOrderDto: UpdateOrderDto = {
+        customer_id: 1,
+        order_quantity: 1,
+        product_id: 1,
+      };
+
+      it('should return success when update order', async () => {
+        const orderSum = {
+          name: 'odol',
+          description: 'ini pasta gigi',
+          tag: 'pasta gigi',
+          quantity: 100,
+          id: 61,
+          created_at: undefined,
+          updated_at: undefined,
+        } as unknown as Orders;
+
+        jest
+          .spyOn(orderRepository, 'findOneBy')
+          .mockResolvedValueOnce(orderStub());
+
+        jest
+          .spyOn(productRepository, 'findOneBy')
+          .mockResolvedValueOnce(productStub());
+
+        jest
+          .spyOn(customerRepository, 'findOneBy')
+          .mockResolvedValueOnce(custStub());
+
+        jest.spyOn(productRepository, 'save').mockResolvedValueOnce(undefined);
+        jest.spyOn(orderRepository, 'save').mockResolvedValueOnce(orderSum);
+
+        const result = await service.update(1, updateOrderDto);
+        expect(result.data).toEqual(orderSum);
+      });
+
+      it('should return failed when update order no product', async () => {
+        jest
+          .spyOn(orderRepository, 'findOneBy')
+          .mockResolvedValueOnce(undefined);
+
+        try {
+          await service.update(1, updateOrderDto);
+        } catch (error) {
+          expect(error.status).toBe(403);
+          expect(error.message).toBe('Forbidden');
+        }
+      });
+    });
+
+    describe('Delete Order', () => {
+      it('should return success when delete order', async () => {
+        const mockDeleteResult: DeleteResult = {
+          raw: null, // You can set this to null or any other appropriate value
+          affected: 1,
+        };
+        jest
+          .spyOn(orderRepository, 'delete')
+          .mockResolvedValueOnce(mockDeleteResult);
+        const data = await service.remove(1);
+        expect(data).toEqual({});
       });
     });
   });
