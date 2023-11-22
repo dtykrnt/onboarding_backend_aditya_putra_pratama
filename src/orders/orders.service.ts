@@ -1,5 +1,7 @@
 import {
   ForbiddenException,
+  HttpException,
+  HttpStatus,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -34,7 +36,7 @@ export class OrdersService {
     });
 
     if (!customer) {
-      throw new ForbiddenException();
+      throw new HttpException('error', HttpStatus.FORBIDDEN);
     }
 
     if (!product) {

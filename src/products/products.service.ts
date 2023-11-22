@@ -21,13 +21,27 @@ export class ProductsService {
     private readonly productSingleRepository: ProductsRepository<IProducts>,
   ) {}
 
+  /**
+   *
+   *
+   * @param {CreateProductDto} createProductDto
+   * @return {*}  {Promise<IResponseJson<any>>}
+   * @memberof ProductsService
+   */
   async create(
     createProductDto: CreateProductDto,
-  ): Promise<IResponseJson<any>> {
+  ): Promise<IResponseJson<IProducts>> {
     const data = await this.productRepository.save(createProductDto);
     return { data };
   }
 
+  /**
+   *
+   *
+   * @param {BaseQueryDTO} query
+   * @return {*}  {Promise<IResponseJson<IProducts>>}
+   * @memberof ProductsService
+   */
   async findAll(query: BaseQueryDTO): Promise<IResponseJson<IProducts>> {
     const { page, size, sort, order, search } = query;
     const builder = this.productRepository.createQueryBuilder('p');
@@ -54,6 +68,14 @@ export class ProductsService {
     return { data };
   }
 
+  /**
+   *
+   *
+   * @param {number} id
+   * @param {UpdateProductDto} updateProductDto
+   * @return {*}  {Promise<IResponseJson<IProducts>>}
+   * @memberof ProductsService
+   */
   async update(
     id: number,
     updateProductDto: UpdateProductDto,
@@ -61,6 +83,13 @@ export class ProductsService {
     return this.productSingleRepository.updateProduct(id, updateProductDto);
   }
 
+  /**
+   *
+   *
+   * @param {number} id
+   * @return {*}
+   * @memberof ProductsService
+   */
   async remove(id: number) {
     const deleteBuilder = this.productRepository.createQueryBuilder('products');
     await deleteBuilder.delete().where('products.id = :id', { id }).execute();
