@@ -41,11 +41,11 @@ export class OrdersService {
       throw new NotFoundException();
     }
 
-    if (createOrderDto.order_quantity > product.quantity) {
+    if (product.quantity == 0) {
       throw new ForbiddenException();
     }
 
-    if (product.quantity == 0) {
+    if (createOrderDto.order_quantity > product.quantity) {
       throw new ForbiddenException();
     }
 
