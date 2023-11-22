@@ -133,7 +133,10 @@ export class OrdersService {
   }
 
   async remove(id: number) {
-    const data = await this.orderRepository.delete({ id });
-    return { data };
+    const result = await this.orderRepository.delete({ id });
+    if (result.affected == 1) {
+      return {};
+    }
+    return {};
   }
 }

@@ -1,12 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { CreateOrderDto } from '../dto';
+import { DeleteOrderDto } from '../dto/delete-order.dto';
 import { OrdersController } from '../orders.controller';
 import { OrdersService } from '../orders.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Customers } from 'src/customers/entity';
-import { Products } from 'src/products/entities';
-import { Orders } from '../entities';
-import { CreateOrderDto } from '../dto';
-import { Repository } from 'typeorm';
 import { orderStub } from './stubs/order.stub';
 
 describe('OrdersController', () => {
@@ -24,6 +20,9 @@ describe('OrdersController', () => {
       return {
         ...orderStub(),
       };
+    }),
+    remove: jest.fn((dto: DeleteOrderDto) => {
+      return {};
     }),
   };
 
@@ -51,14 +50,21 @@ describe('OrdersController', () => {
     };
     describe('Create API', () => {
       it('should success when create order api', async () => {
-        const data = await controller.create(createOrderDto);
-        expect(data).toEqual(orderStub());
+        const res = await controller.create(createOrderDto);
+        expect(res).toEqual(orderStub());
       });
     });
     describe('Update API', () => {
-      it('should return when update api', async () => {
-        const data = await controller.update(1, createOrderDto);
-        expect(data).toEqual(orderStub());
+      it('should return data when update api', async () => {
+        const res = await controller.update(1, createOrderDto);
+        expect(res).toEqual(orderStub());
+      });
+    });
+
+    describe('Delete API', () => {
+      it('should return {} when update api', async () => {
+        const res = await controller.remove(1);
+        expect(res).toEqual({});
       });
     });
   });
