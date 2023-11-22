@@ -11,12 +11,14 @@ import { EntityNotFoundError, Repository } from 'typeorm';
 import { IResponseJson, Pagination } from 'src/interface';
 import { BaseQueryDTO } from 'src/helpers/dto/queries.dto';
 import { IProducts } from './products.interface';
+import { ProductsRepository } from './repositories/products.repository';
 
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectRepository(Products)
     private readonly productRepository: Repository<Products>,
+    private readonly productSingleRepository: ProductsRepository<IProducts>,
   ) {}
 
   async create(
@@ -56,25 +58,7 @@ export class ProductsService {
     id: number,
     updateProductDto: UpdateProductDto,
   ): Promise<IResponseJson<IProducts>> {
-    const isExist = await this.productRepository.findOneBy({ id });
-    if (!isExist) {
-      throw new NotFoundException();
-    }
-    const builder = this.productRepository.createQueryBuilder('products');
-
-    const updateResult = await builder
-      .update(Products)
-      .set(updateProductDto)
-      .where('products.id = :id', { id })
-      .execute();
-
-    if (updateResult.affected !== 1) {
-      throw new ForbiddenException();
-    }
-
-    const data = await this.productRepository.findOneBy({ id });
-
-    return { data };
+    return this.productSingleRepository.updateProduct(id, updateProductDto);
   }
 
   async remove(id: number) {

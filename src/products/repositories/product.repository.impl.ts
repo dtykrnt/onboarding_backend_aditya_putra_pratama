@@ -13,7 +13,7 @@ import { ProductsRepository } from './products.repository';
 @Injectable()
 export class ProductsRepositoryImpl
   extends Repository<Products>
-  implements ProductsRepository
+  implements ProductsRepository<IProducts>
 {
   constructor(private dataSource: DataSource) {
     super(Products, dataSource.createEntityManager());
