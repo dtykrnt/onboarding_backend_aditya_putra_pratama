@@ -2,6 +2,8 @@ import {
   CallHandler,
   ExecutionContext,
   HttpException,
+  HttpExceptionBody,
+  HttpExceptionBodyMessage,
   HttpStatus,
   Injectable,
   NestInterceptor,
@@ -11,7 +13,7 @@ import { IResponse, Pagination, ResponseTypes } from '../../interface';
 
 interface IError {
   message: string;
-  code: string;
+  property: string;
 }
 @Injectable()
 export class ResponsesInterceptors<T>
@@ -101,18 +103,29 @@ export class ResponsesInterceptors<T>
   ): IResponse<T> {
     const ctx = context.switchToHttp();
     const response = ctx.getResponse();
+    let errors = null;
 
     const status =
       exception instanceof HttpException
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
+    const respError = exception.getResponse() as HttpExceptionBody;
+
+    if (Array.isArray(respError.message)) {
+      const messageError = respError.message as unknown as IError[];
+      errors = messageError.map((e) => ({
+        field: e.property,
+        message: e.message,
+      }));
+    }
+
     return response.status(status).json({
       response_schema: {
         response_code: status.toString(),
         response_message: exception.message,
       },
-      response_output: {},
+      response_output: errors ? { errors } : null,
     });
   }
 }
