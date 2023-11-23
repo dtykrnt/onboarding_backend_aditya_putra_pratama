@@ -30,13 +30,14 @@ export class ChatsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     return this.chatsService.create(createChatDto);
   }
 
+  @SubscribeMessage('sendChat')
+  createOne(@MessageBody() createChatDto: CreateChatDto) {
+    this.server.emit('onSendMessage', createChatDto);
+    return this.chatsService.createOne(createChatDto);
+  }
+
   @SubscribeMessage('findAllChats')
   findAll(@MessageBody() message: any) {
-    this.server.emit('onMessage', {
-      message: 'from server',
-      content: message,
-      date: new Date(),
-    });
     return this.chatsService.findAll();
   }
 

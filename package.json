@@ -8,6 +8,7 @@
   "scripts": {
     "build": "nest build",
     "docker:start:dev": "docker compose up dev-db -d",
+    "docker:start:mongo": "docker compose up dev-mongo -d",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -29,6 +30,7 @@
     "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.0",
     "@nestjs/mapped-types": "*",
+    "@nestjs/mongoose": "^10.0.2",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/platform-socket.io": "^10.2.10",
     "@nestjs/platform-ws": "^10.2.10",
@@ -36,6 +38,7 @@
     "@nestjs/websockets": "^10.2.10",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "mongoose": "^8.0.1",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",

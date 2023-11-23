@@ -9,8 +9,7 @@ import { DatabaseService } from './helpers/database/database.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CustomersModule } from './customers/customers.module';
 import { ChatsModule } from './chats/chats.module';
-import { ChatsGateway } from './chats/chats.gateway';
-import { ChatsService } from './chats/chats.service';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -25,6 +24,10 @@ import { ChatsService } from './chats/chats.service';
       useClass: DatabaseService,
     }),
     ChatsModule,
+    MongooseModule.forRoot('mongodb://localhost:27017', {
+      user: 'root',
+      pass: '123',
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, DatabaseService],
