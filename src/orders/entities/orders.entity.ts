@@ -50,6 +50,9 @@ export class Orders {
   @Column({ type: 'enum', enum: EPaymentMethod, default: null, nullable: true })
   payment_method?: EPaymentMethod;
 
+  @Column({ nullable: true })
+  transaction_id?: number;
+
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
 

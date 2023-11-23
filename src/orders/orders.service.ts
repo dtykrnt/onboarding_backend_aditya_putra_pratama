@@ -199,6 +199,10 @@ export class OrdersService {
     order.status = EOrderStatus.PAID;
     order.payment_method = dto.payment_method;
 
+    let transactionId = Math.random() * 100;
+
+    order.transaction_id = transactionId;
+
     const data = await this.orderRepository.save(order);
 
     return { data };
