@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
 @Injectable()
 export class DatabaseService implements TypeOrmOptionsFactory {
   constructor(private configService: ConfigService) {}
   createTypeOrmOptions():
-    | (TypeOrmModuleOptions & { factories: any; seeds: any })
+    | (TypeOrmModuleOptions & { factories: any; seeds: any; cli: any })
     | (Promise<TypeOrmModuleOptions> & { factories: any; seeds: any }) {
     return {
       name: 'default',
@@ -20,6 +21,10 @@ export class DatabaseService implements TypeOrmOptionsFactory {
       entities: ['dist/**/*.entity{.ts,.js}', 'dist/**/**/*.entity{.ts,.js}'],
       factories: ['dist/**/factories/**/*.js'],
       seeds: ['dist/**/seeds/**/*.js'],
+      migrations: ['migration/*.js'],
+      cli: {
+        migrationsDir: 'dist/migration',
+      },
       autoLoadEntities: true,
     };
   }
@@ -28,6 +33,7 @@ export class DatabaseService implements TypeOrmOptionsFactory {
 export const typeOrmConfig: TypeOrmModuleOptions & {
   factories: any;
   seeds: any;
+  cli: any;
 } = {
   type: 'postgres',
   host: process.env.DB_HOST,
@@ -38,13 +44,13 @@ export const typeOrmConfig: TypeOrmModuleOptions & {
   entities: ['dist/**/*.entity{.ts,.js}', 'dist/**/**/*.entity{.ts,.js}'],
   factories: ['dist/**/factories/**/*.js'],
   seeds: ['dist/**/seeds/**/*.js'],
-  // migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
-  // cli: {
-  //   migrationsDir: __dirname + '/../database/migrations',
-  // },
   extra: {
     charset: 'utf8mb4_unicode_ci',
   },
   synchronize: process.env.DB_SYNC === 'true',
+  migrations: ['src/migrations/**'],
   autoLoadEntities: true,
+  cli: {
+    migrationsDir: 'dist/migration',
+  },
 };

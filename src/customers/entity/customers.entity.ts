@@ -20,6 +20,9 @@ export class Customers {
   @Column()
   email: string;
 
+  @Column()
+  phone_number: string;
+
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
 

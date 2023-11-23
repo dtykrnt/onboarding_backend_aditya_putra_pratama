@@ -1,7 +1,7 @@
 import { Products } from 'src/products/entities';
 import { Connection } from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
-import * as productData from '../migrations/products_202311191659.json';
+import * as productData from './stubs/products_202311191659.json';
 
 export class ProductCreateSeeder implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
