@@ -41,11 +41,11 @@ export class OrdersService {
       throw new NotFoundException();
     }
 
-    if (createOrderDto.order_quantity > product.quantity) {
+    if (product.quantity == 0) {
       throw new ForbiddenException();
     }
 
-    if (product.quantity == 0) {
+    if (createOrderDto.order_quantity > product.quantity) {
       throw new ForbiddenException();
     }
 
@@ -133,7 +133,10 @@ export class OrdersService {
   }
 
   async remove(id: number) {
-    const data = await this.orderRepository.delete({ id });
-    return { data };
+    const result = await this.orderRepository.delete({ id });
+    if (result.affected == 1) {
+      return {};
+    }
+    return {};
   }
 }
