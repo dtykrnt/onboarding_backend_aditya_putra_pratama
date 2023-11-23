@@ -1,0 +1,323 @@
+{
+"customers": [
+	{
+		"id" : 1,
+		"name" : "Ike Goldner",
+		"email" : "ikegoldner@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.456Z",
+		"updated_at" : "2023-11-23T06:40:53.456Z"
+	},
+	{
+		"id" : 2,
+		"name" : "Dwight Prohaska",
+		"email" : "dwightprohaska@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.463Z",
+		"updated_at" : "2023-11-23T06:40:53.463Z"
+	},
+	{
+		"id" : 3,
+		"name" : "Mattie Heathcote",
+		"email" : "mattieheathcote@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.465Z",
+		"updated_at" : "2023-11-23T06:40:53.465Z"
+	},
+	{
+		"id" : 4,
+		"name" : "Dixie Doyle",
+		"email" : "dixiedoyle@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.467Z",
+		"updated_at" : "2023-11-23T06:40:53.467Z"
+	},
+	{
+		"id" : 5,
+		"name" : "Connie Schaefer",
+		"email" : "connieschaefer@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.469Z",
+		"updated_at" : "2023-11-23T06:40:53.469Z"
+	},
+	{
+		"id" : 6,
+		"name" : "Verla Walsh",
+		"email" : "verlawalsh@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.471Z",
+		"updated_at" : "2023-11-23T06:40:53.471Z"
+	},
+	{
+		"id" : 7,
+		"name" : "Peyton Feest",
+		"email" : "peytonfeest@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.473Z",
+		"updated_at" : "2023-11-23T06:40:53.473Z"
+	},
+	{
+		"id" : 8,
+		"name" : "Johann Kozey",
+		"email" : "johannkozey@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.475Z",
+		"updated_at" : "2023-11-23T06:40:53.475Z"
+	},
+	{
+		"id" : 9,
+		"name" : "Rory Auer",
+		"email" : "roryauer@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.477Z",
+		"updated_at" : "2023-11-23T06:40:53.477Z"
+	},
+	{
+		"id" : 10,
+		"name" : "Bill Ritchie",
+		"email" : "billritchie@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.480Z",
+		"updated_at" : "2023-11-23T06:40:53.480Z"
+	},
+	{
+		"id" : 11,
+		"name" : "Berenice Hackett",
+		"email" : "berenicehackett@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.481Z",
+		"updated_at" : "2023-11-23T06:40:53.481Z"
+	},
+	{
+		"id" : 12,
+		"name" : "Camille Schoen",
+		"email" : "camilleschoen@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.483Z",
+		"updated_at" : "2023-11-23T06:40:53.483Z"
+	},
+	{
+		"id" : 13,
+		"name" : "Isabell Lueilwitz",
+		"email" : "isabelllueilwitz@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.484Z",
+		"updated_at" : "2023-11-23T06:40:53.484Z"
+	},
+	{
+		"id" : 14,
+		"name" : "Shirley Ward",
+		"email" : "shirleyward@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.487Z",
+		"updated_at" : "2023-11-23T06:40:53.487Z"
+	},
+	{
+		"id" : 15,
+		"name" : "Wendell Shields",
+		"email" : "wendellshields@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.488Z",
+		"updated_at" : "2023-11-23T06:40:53.488Z"
+	},
+	{
+		"id" : 16,
+		"name" : "Isac Rogahn",
+		"email" : "isacrogahn@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.490Z",
+		"updated_at" : "2023-11-23T06:40:53.490Z"
+	},
+	{
+		"id" : 17,
+		"name" : "Greyson Waters",
+		"email" : "greysonwaters@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.491Z",
+		"updated_at" : "2023-11-23T06:40:53.491Z"
+	},
+	{
+		"id" : 18,
+		"name" : "Kendall Erdman",
+		"email" : "kendallerdman@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.492Z",
+		"updated_at" : "2023-11-23T06:40:53.492Z"
+	},
+	{
+		"id" : 19,
+		"name" : "Eunice Weimann",
+		"email" : "euniceweimann@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.494Z",
+		"updated_at" : "2023-11-23T06:40:53.494Z"
+	},
+	{
+		"id" : 20,
+		"name" : "Curt Bashirian",
+		"email" : "curtbashirian@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.495Z",
+		"updated_at" : "2023-11-23T06:40:53.495Z"
+	},
+	{
+		"id" : 21,
+		"name" : "Christy Schowalter",
+		"email" : "christyschowalter@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.496Z",
+		"updated_at" : "2023-11-23T06:40:53.496Z"
+	},
+	{
+		"id" : 22,
+		"name" : "Litzy West",
+		"email" : "litzywest@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.498Z",
+		"updated_at" : "2023-11-23T06:40:53.498Z"
+	},
+	{
+		"id" : 23,
+		"name" : "Dwight Rau",
+		"email" : "dwightrau@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.499Z",
+		"updated_at" : "2023-11-23T06:40:53.499Z"
+	},
+	{
+		"id" : 24,
+		"name" : "Ila Kilback",
+		"email" : "ilakilback@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.500Z",
+		"updated_at" : "2023-11-23T06:40:53.500Z"
+	},
+	{
+		"id" : 25,
+		"name" : "Shanon West",
+		"email" : "shanonwest@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.501Z",
+		"updated_at" : "2023-11-23T06:40:53.501Z"
+	},
+	{
+		"id" : 26,
+		"name" : "Enid Jacobs",
+		"email" : "enidjacobs@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.503Z",
+		"updated_at" : "2023-11-23T06:40:53.503Z"
+	},
+	{
+		"id" : 27,
+		"name" : "Noemi Kertzmann",
+		"email" : "noemikertzmann@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.504Z",
+		"updated_at" : "2023-11-23T06:40:53.504Z"
+	},
+	{
+		"id" : 28,
+		"name" : "Lucile Rath",
+		"email" : "lucilerath@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.505Z",
+		"updated_at" : "2023-11-23T06:40:53.505Z"
+	},
+	{
+		"id" : 29,
+		"name" : "Haskell Lehner",
+		"email" : "haskelllehner@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.506Z",
+		"updated_at" : "2023-11-23T06:40:53.506Z"
+	},
+	{
+		"id" : 30,
+		"name" : "Ollie Kuhlman",
+		"email" : "olliekuhlman@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.507Z",
+		"updated_at" : "2023-11-23T06:40:53.507Z"
+	},
+	{
+		"id" : 31,
+		"name" : "Rosario Hessel",
+		"email" : "rosariohessel@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.508Z",
+		"updated_at" : "2023-11-23T06:40:53.508Z"
+	},
+	{
+		"id" : 32,
+		"name" : "Allan Larson",
+		"email" : "allanlarson@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.509Z",
+		"updated_at" : "2023-11-23T06:40:53.509Z"
+	},
+	{
+		"id" : 33,
+		"name" : "Antonina Hickle",
+		"email" : "antoninahickle@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.511Z",
+		"updated_at" : "2023-11-23T06:40:53.511Z"
+	},
+	{
+		"id" : 34,
+		"name" : "Alexandria Kunde",
+		"email" : "alexandriakunde@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.511Z",
+		"updated_at" : "2023-11-23T06:40:53.511Z"
+	},
+	{
+		"id" : 35,
+		"name" : "Rosanna Langworth",
+		"email" : "rosannalangworth@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.512Z",
+		"updated_at" : "2023-11-23T06:40:53.512Z"
+	},
+	{
+		"id" : 36,
+		"name" : "Cyril Osinski",
+		"email" : "cyrilosinski@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.513Z",
+		"updated_at" : "2023-11-23T06:40:53.513Z"
+	},
+	{
+		"id" : 37,
+		"name" : "Trycia Reilly",
+		"email" : "tryciareilly@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.514Z",
+		"updated_at" : "2023-11-23T06:40:53.514Z"
+	},
+	{
+		"id" : 38,
+		"name" : "Santos Jacobson",
+		"email" : "santosjacobson@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.515Z",
+		"updated_at" : "2023-11-23T06:40:53.515Z"
+	},
+	{
+		"id" : 39,
+		"name" : "Rosanna Howell",
+		"email" : "rosannahowell@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.516Z",
+		"updated_at" : "2023-11-23T06:40:53.516Z"
+	},
+	{
+		"id" : 40,
+		"name" : "Adella Shanahan",
+		"email" : "adellashanahan@gmail.com",
+		"phone_number" : "123",
+		"created_at" : "2023-11-23T06:40:53.517Z",
+		"updated_at" : "2023-11-23T06:40:53.517Z"
+	}
+]}

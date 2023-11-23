@@ -6,7 +6,9 @@ define(Customers, (faker: Faker) => {
   const customer = new Customers();
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
+  const email = `${firstName + lastName}`.toLowerCase();
   customer.name = `${firstName} ${lastName}`;
-  customer.email = `${firstName}${lastName}@gmail.com`;
+  customer.email = `${email}@gmail.com`;
+  customer.phone_number = '123';
   return customer;
 });

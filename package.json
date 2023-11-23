@@ -19,10 +19,14 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config -n src/helpers/database/database-config.ts",
-    "seed:run:customer": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/helpers/database/database-config.ts -s CustomerCreateSeeder",
-    "seed:run:product": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/helpers/database/database-config.ts -s ProductCreateSeeder",
-    "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed -n src/helpers/database/database-config.ts"
+    "seeder":"ts-node ./node_modules/typeorm-seeding/dist/cli.js",
+    "seed:config": "yarn seeder config -n src/helpers/database/database-config.ts",
+    "seed:run:customer": "yarn seeder seed -n src/helpers/database/database-config.ts -s CustomerCreateSeeder",
+    "seed:run:product": "yarn seeder seed -n src/helpers/database/database-config.ts -s ProductCreateSeeder",
+    "seed:run": "yarn seeder seed -n src/helpers/database/database-config.ts",
+    "typeorm": "ts-node ./node_modules/typeorm/cli ",
+    "migration:run": "yarn run typeorm migration:run -d dist/helpers/database/typeorm.js",
+    "migration:create": "f() { yarn build && yarn typeorm migration:create  \"./src/migrations/$@\"; }; f"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -33,6 +37,7 @@
     "@nestjs/typeorm": "^10.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "dotenv": "^16.3.1",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",

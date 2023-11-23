@@ -1,5 +1,5 @@
 import { Customers } from 'src/customers/entity';
-import { Orders } from 'src/orders/entities';
+import { EOrderStatus, Orders } from 'src/orders/entities';
 import { Products } from 'src/products/entities';
 
 export const orderStub = (): Orders => {
@@ -24,10 +24,15 @@ export const orderStub = (): Orders => {
       created_at: undefined,
       updated_at: undefined,
       orders: [],
+      phone_number: '081238123',
     },
+    status: EOrderStatus.PENDING,
     customer_id: 1,
     product_id: 1,
     id: 1,
+    name: '',
+    email: '',
+    phone_number: '081238123',
   };
 };
 
@@ -52,5 +57,6 @@ export const custStub = (): Customers => {
     orders: undefined,
     email: 'customer@gmail.com',
     updated_at: undefined,
+    phone_number: '082386',
   };
 };

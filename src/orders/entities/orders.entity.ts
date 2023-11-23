@@ -10,6 +10,17 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+export enum EOrderStatus {
+  PENDING = 'pending',
+  PROCCESS = 'processing',
+  PAID = 'paid',
+  COMPLETED = 'completed',
+}
+
+export enum EPaymentMethod {
+  BANK = 'Bank Transfer',
+  EMONEY = 'E-money',
+}
 @Entity()
 export class Orders {
   @PrimaryGeneratedColumn()
@@ -23,6 +34,21 @@ export class Orders {
 
   @Column()
   quantity: number;
+
+  @Column({ nullable: true })
+  name?: string;
+
+  @Column({ nullable: true })
+  email?: string;
+
+  @Column({ nullable: true })
+  phone_number?: string;
+
+  @Column({ type: 'enum', enum: EOrderStatus, default: EOrderStatus.PENDING })
+  status: EOrderStatus;
+
+  @Column({ type: 'enum', enum: EPaymentMethod, default: null, nullable: true })
+  payment_method?: EPaymentMethod;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

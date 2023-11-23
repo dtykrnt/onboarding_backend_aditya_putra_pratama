@@ -13,6 +13,8 @@ import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { BaseQueryDTO } from 'src/helpers/dto/queries.dto';
+import { SubmitOrderDto } from './dto';
+import { PayOrderDto } from './dto/pay-order.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -44,5 +46,15 @@ export class OrdersController {
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.ordersService.remove(id);
+  }
+
+  @Post('submit')
+  submit(@Body() dto: SubmitOrderDto) {
+    return this.ordersService.submit(dto);
+  }
+
+  @Post('pay')
+  pay(@Body() dto: PayOrderDto) {
+    return this.ordersService.pay(dto);
   }
 }

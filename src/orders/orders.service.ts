@@ -8,10 +8,12 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Products } from 'src/products/entities';
 import { Repository } from 'typeorm';
-import { Orders } from './entities/orders.entity';
+import { EOrderStatus, EPaymentMethod, Orders } from './entities/orders.entity';
 import { BaseQueryDTO } from 'src/helpers/dto/queries.dto';
 import { Pagination } from 'src/interface';
 import { Customers } from 'src/customers/entity';
+import { SubmitOrderDto } from './dto';
+import { PayOrderDto } from './dto/pay-order.dto';
 
 @Injectable()
 export class OrdersService {
@@ -57,6 +59,10 @@ export class OrdersService {
         id: createOrderDto.customer_id,
       },
     });
+
+    if (existingOrder.status === EOrderStatus.PROCCESS) {
+      throw new ForbiddenException();
+    }
 
     if (existingOrder) {
       existingOrder.quantity += createOrderDto.order_quantity;
@@ -138,5 +144,63 @@ export class OrdersService {
       return {};
     }
     return {};
+  }
+
+  async submit(dto: SubmitOrderDto) {
+    const order = await this.orderRepository.findOneBy({
+      id: dto.order_id,
+    });
+
+    if (!order) {
+      throw new NotFoundException();
+    }
+
+    if (order.status === EOrderStatus.PROCCESS) {
+      throw new ForbiddenException();
+    }
+
+    order.name = dto.name;
+    order.email = dto.email;
+    order.phone_number = dto.phone_number;
+    order.status = EOrderStatus.PROCCESS;
+
+    const data = await this.orderRepository.save(order);
+
+    return { data };
+  }
+
+  async pay(dto: PayOrderDto) {
+    const order = await this.orderRepository.findOneBy({
+      id: dto.order_id,
+    });
+
+    if (!order) {
+      throw new NotFoundException();
+    }
+
+    const isBankPaymentMethod = dto.payment_method === EPaymentMethod.BANK;
+
+    if (!isBankPaymentMethod) {
+      throw new ForbiddenException();
+    }
+
+    const isInProcess = order.status === EOrderStatus.PROCCESS;
+
+    if (!isInProcess) {
+      throw new ForbiddenException();
+    }
+
+    const isPaid = order.status === EOrderStatus.PAID;
+
+    if (isPaid) {
+      throw new ForbiddenException();
+    }
+
+    order.status = EOrderStatus.PAID;
+    order.payment_method = dto.payment_method;
+
+    const data = await this.orderRepository.save(order);
+
+    return { data };
   }
 }
