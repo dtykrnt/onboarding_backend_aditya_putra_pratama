@@ -4,7 +4,7 @@ import { EPaymentMethod } from '../entities';
 
 export class PayOrderDto {
   @IsNotEmpty()
-  @IsEnum(EPaymentMethod)
+  @IsEnum(EPaymentMethod, { message: 'Wrong Payment Method' })
   payment_method: EPaymentMethod;
 
   @IsNotEmpty()

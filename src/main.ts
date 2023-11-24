@@ -1,7 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe, VersioningType } from '@nestjs/common';
+import {
+  BadRequestException,
+  ValidationPipe,
+  VersioningType,
+} from '@nestjs/common';
 import { ResponsesInterceptors } from './helpers/interceptors';
+import { HttpExceptionFilter } from './helpers/interceptors/response.error.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,9 +19,11 @@ async function bootstrap() {
     new ValidationPipe({
       forbidUnknownValues: true,
       whitelist: true,
+      stopAtFirstError: true,
     }),
   );
   app.useGlobalInterceptors(new ResponsesInterceptors());
+  // app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(3000);
 }
 

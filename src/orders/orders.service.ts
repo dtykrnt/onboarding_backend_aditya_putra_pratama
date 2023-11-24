@@ -201,7 +201,7 @@ export class OrdersService {
 
     let transactionId = Math.random() * 100;
 
-    order.transaction_id = transactionId;
+    order.transaction_id = Math.round(transactionId);
 
     const data = await this.orderRepository.save(order);
 
