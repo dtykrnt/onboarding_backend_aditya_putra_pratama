@@ -17,10 +17,10 @@ export class SubmitOrderDto {
   name: string;
 
   @IsNotEmpty()
-  @IsPhoneNumber()
+  // @IsPhoneNumber()
   phone_number: string;
 
   @IsNotEmpty()
-  @IsEmail()
+  // @IsEmail()
   email: string;
 }

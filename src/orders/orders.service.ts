@@ -36,11 +36,11 @@ export class OrdersService {
     });
 
     if (!customer) {
-      throw new ForbiddenException();
+      throw new NotFoundException('Customer Not Found');
     }
 
     if (!product) {
-      throw new NotFoundException();
+      throw new NotFoundException('Product Not Found');
     }
 
     if (product.quantity == 0) {
@@ -59,10 +59,6 @@ export class OrdersService {
         id: createOrderDto.customer_id,
       },
     });
-
-    if (existingOrder.status === EOrderStatus.PROCCESS) {
-      throw new ForbiddenException();
-    }
 
     if (existingOrder) {
       existingOrder.quantity += createOrderDto.order_quantity;
@@ -150,13 +146,14 @@ export class OrdersService {
     const order = await this.orderRepository.findOneBy({
       id: dto.order_id,
     });
+    console.log({ order });
 
     if (!order) {
-      throw new NotFoundException();
+      throw new NotFoundException('Order Not Found');
     }
 
     if (order.status === EOrderStatus.PROCCESS) {
-      throw new ForbiddenException();
+      throw new ForbiddenException('Status is ON Progress');
     }
 
     order.name = dto.name;

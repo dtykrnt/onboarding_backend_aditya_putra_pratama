@@ -110,15 +110,17 @@ export class ResponsesInterceptors<T>
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    const respError = exception.getResponse() as HttpExceptionBody;
+    // const respError = exception?.getResponse() as HttpExceptionBody;
 
-    if (Array.isArray(respError.message)) {
-      const messageError = respError.message as unknown as IError[];
-      errors = messageError.map((e) => ({
-        field: e.property,
-        message: e.message,
-      }));
-    }
+    // if (Array.isArray(respError.message)) {
+    //   const messageError = respError.message as unknown as IError[];
+    //   errors = messageError.map((e) => ({
+    //     field: e.property,
+    //     message: e.message,
+    //   }));
+    // }
+
+    console.log({ exception });
 
     return response.status(status).json({
       response_schema: {
