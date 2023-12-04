@@ -5,6 +5,8 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -25,12 +27,6 @@ export enum EPaymentMethod {
 export class Orders {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  customer_id: number;
-
-  @Column()
-  product_id: number;
 
   @Column()
   quantity: number;
@@ -59,9 +55,13 @@ export class Orders {
   @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   updated_at: Date;
 
-  @ManyToOne(() => Products, (product) => product.orders)
-  @JoinColumn({ name: 'product_id', referencedColumnName: 'id' })
-  product: Products;
+  @ManyToMany(() => Products, (product) => product.orders)
+  @JoinTable({
+    name: 'orders_products',
+    joinColumn: { name: 'order_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'product_id', referencedColumnName: 'id' },
+  })
+  products: Products[];
 
   @ManyToOne(() => Customers, (customer) => customer.orders)
   @JoinColumn({ name: 'customer_id', referencedColumnName: 'id' })

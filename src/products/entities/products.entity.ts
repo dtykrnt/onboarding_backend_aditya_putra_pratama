@@ -3,7 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -25,7 +25,7 @@ export class Products {
   @Column()
   tag: string;
 
-  @OneToMany(() => Orders, (order) => order.product)
+  @ManyToMany(() => Orders, (orders) => orders.products)
   orders: Orders[];
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })

@@ -52,7 +52,7 @@ export class OrdersService {
     }
 
     const existingOrder = await this.orderRepository.findOneBy({
-      product: {
+      products: {
         id: createOrderDto.product_id,
       },
       customer: {
@@ -71,7 +71,7 @@ export class OrdersService {
 
     const orders = new Orders();
     orders.quantity = createOrderDto.order_quantity;
-    orders.product = product;
+    orders.products = [product];
     orders.customer = customer;
 
     product.quantity -= createOrderDto.order_quantity;
@@ -119,7 +119,7 @@ export class OrdersService {
     }
 
     const product = await this.productRepository.findOneBy({
-      id: order.product.id,
+      id: order.products[0].id,
     });
 
     if (!product) {
